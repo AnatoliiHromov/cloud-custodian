@@ -107,6 +107,7 @@ ResourceMap = {
     "aws.lightsail-instance": "c7n.resources.lightsail.Instance",
     "aws.log-group": "c7n.resources.cw.LogGroup",
     "aws.message-broker": "c7n.resources.mq.MessageBroker",
+    "aws.metric-filter": "c7n.resources.cw.MetricFilter",
     "aws.ml-model": "c7n.resources.ml.MLModel",
     "aws.nat-gateway": "c7n.resources.vpc.NATGateway",
     "aws.network-acl": "c7n.resources.vpc.NetworkAcl",

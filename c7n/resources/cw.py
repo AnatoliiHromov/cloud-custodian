@@ -407,3 +407,26 @@ class EncryptLogGroup(BaseAction):
                     client.disassociate_kms_key(logGroupName=r['logGroupName'])
             except client.exceptions.ResourceNotFoundException:
                 continue
+
+
+@resources.register('metric-filter')
+class MetricFilter(QueryResourceManager):
+
+    class resource_type(TypeInfo):
+        service = 'logs'
+        arn_type = None
+        enum_spec = ('describe_metric_filters', 'metricFilters', None)
+        id = name = 'filterName'
+        filter_name = 'MetricFilters'
+        filter_type = 'list'
+        dimension = 'MetricFilter'
+        date = 'creationTime'
+        cfn_type = 'AWS::Logs::Alarm'
+
+    retry = staticmethod(get_retry(('Throttled',)))
+
+    def augment(self, resources):
+        resources = universal_augment(self, resources)
+        for r in resources:
+            r['creationTime'] = r['creationTime'] / 1000.0
+        return resources
